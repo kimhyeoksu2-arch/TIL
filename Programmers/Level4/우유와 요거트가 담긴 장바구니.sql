@@ -1,0 +1,9 @@
+SELECT CART_ID
+FROM (
+    SELECT CART_ID	
+        , SUM(CASE WHEN NAME = 'Yogurt' THEN 1 ELSE 0 END) AS Yogurt_CNT
+        , SUM(CASE WHEN NAME = 'Milk' THEN 1 ELSE 0 END) AS Milk_CNT
+    FROM CART_PRODUCTS 
+    GROUP BY CART_ID
+) AS t 
+WHERE Yogurt_CNT >= 1 AND Milk_CNT >= 1
